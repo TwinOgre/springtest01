@@ -17,6 +17,8 @@ public class Article {
     @Column(length = 200)
     private String subject;
 
+
+
     @Column(columnDefinition = "TEXT")
     private String content;
 
