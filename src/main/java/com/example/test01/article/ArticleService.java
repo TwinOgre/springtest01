@@ -1,10 +1,12 @@
 package com.example.test01.article;
 
+import com.example.test01.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +23,13 @@ public class ArticleService {
 
     public List<Article> list() {
         return this.articleRepository.findAll();
+    }
+    public Article getArticle(Integer id){
+        Optional<Article> question = this.articleRepository.findById(id);
+        if (question.isPresent()) {
+            return question.get();
+        } else {
+            throw new DataNotFoundException("question not found");
+        }
     }
 }

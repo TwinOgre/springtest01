@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,8 +25,9 @@ public class ArticleController {
         return "article_list";
     }
     @GetMapping("/detail/{id}")
-    public String detail(){
-
+    public String detail(Model model, @PathVariable("id") Integer id){
+        Article article = this.articleService.getArticle(id);
+        model.addAttribute("article", article);
         return "article_detail";
     }
     @GetMapping("/create")
